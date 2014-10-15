@@ -1,5 +1,19 @@
 # WordPress Skeleton
 
+A skeleton install of WordPress, with the WordPress core separated out as a Git submodule, and the user content stored in a `/content/` directory, instead of `/wp-content/`.
+
+## Getting Started
+
+1. Download the ZIP (dont't clone the repo).
+1. Init a new Git repo.
+
+ 
+
+
+## Original README.md
+
+from [https://github.com/markjaquith/WordPress-Skeleton](https://github.com/markjaquith/WordPress-Skeleton)
+
 This is simply a skeleton repo for a WordPress site. Use it to jump-start your WordPress site repos, or fork it and customize it to your own liking!
 
 ## Assumptions
