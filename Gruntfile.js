@@ -23,7 +23,7 @@ module.exports = function(grunt) {
             },
             livereload: {
                 options: { livereload: true },
-                files: ['content/themes/<themename>/includes/css/<themename>.css', 'content/themes/<themename>/includes/js/*.js', 'content/themes/<themename>/includes/images/**/*.{png,jpg,jpeg,gif,webp,svg}']
+                files: ['content/themes/<themename>/includes/css/main.css', 'content/themes/<themename>/includes/js/*.js', 'content/themes/<themename>/includes/images/**/*.{png,jpg,jpeg,gif,webp,svg}']
             }
         },
 
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                     style: 'expanded',
                 },
                 files: {
-                    'content/themes/<themename>/includes/css/<themename>.css': 'content/themes/<themename>/includes/sass/<themename>.scss'
+                    'content/themes/<themename>/includes/css/main.css': 'content/themes/<themename>/includes/sass/main.scss'
                 }
             }
         },
@@ -121,9 +121,9 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'content/themes/<themename>/includes/css/images/',
+                    cwd: 'content/themes/<themename>/includes/images/',
                     src: ['**/*.{png,jpg,gif}'],
-                    dest: 'content/themes/<themename>/includes/css/images/'
+                    dest: 'content/themes/<themename>/includes/images/'
                 }]
             }
         },
@@ -166,7 +166,7 @@ module.exports = function(grunt) {
         'ftp-deploy': {
           build: {
             auth: {
-              host: '<host@tld>',
+              host: '<hostname>',
               port: 21,
               authKey: 'key1'
             },
