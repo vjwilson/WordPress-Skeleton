@@ -132,7 +132,7 @@ module.exports = function(grunt) {
         deploy: {
             options: {
                 args: ["-rlvz", "--checksum"],
-                exclude: ['local-config.php', '.htaccess', '.git*', 'node_modules', '.sass-cache', 'Gruntfile.js', 'package.json', '.ftppass', '.DS_Store', 'README.md', 'config.rb', '.jshintrc', '*.log', '*.swp', 'shared/*', 'content/upgrade/*'],
+                exclude: ['local-config.php', 'local-config-sample.php', '.htaccess', '.git*', 'node_modules', '.sass-cache', 'Gruntfile.js', 'package.json', '.ftppass', '.DS_Store', 'README.md', 'config.rb', '.jshintrc', '*.log', '*.swp', 'shared/*', 'content/upgrade/*', 'sass/'],
                 recursive: true,
                 syncDestIgnoreExcl: false
             },   
