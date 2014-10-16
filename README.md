@@ -4,41 +4,53 @@ A skeleton install of WordPress, with the WordPress core separated out as a Git 
 
 ## Getting Started
 
-1. Download the ZIP (dont't clone the repo).
-1. Init a new Git repo.
+### In Bitbucket...
+1. Create a new repository in the **teamknowmad** account in Bitbucket. Give it a name so that it is clear who the client is and what type of project it is. (For instance, if this is a prototype site for Acme Inc., you could use `prototype.acme.com` )
+1. At the ***Repository setup*** screen in Bitbucket, click the *I have an existing project* turndown arrow. You will need the instructions there in a later step.
+### Now, on your local machine...
+1. Decide where you want your new code repo to live. For instance, I keep a `~/Projects/` folder on my local machine, and I also create individual customer folders in that folder, so that if a customer has more than one site/app/project, each one would have its own repo.
+1. In the customer's directory, clone both this WordPress-Skeleton repo, and the included WordPress submodule all at once. Replace `<projectname>` with the name of this project.
+
+        git clone --recursive git@bitbucket.org:teamknowmad/wordpress-skeleton.git <projectname>
+        
+1. Switch into the new repo directory
+
+        cd <projectname>
+
+1. Change the remote reference for this repo from `origin` to `upstream`.
+
+        git remote rename origin upstream
+
+1. Now, use the Bitbucket instructions from Step 2 above to link your new cloned skeleton to your new Bitbucket repo.
+
+        git remote add origin git@bitbucket.org:teamknowmad/<projectname>.git
+        git push -u origin --all   # pushes up the repo and its refs for the first time
+        git push -u origin --tags  # pushes up any tags 
+
+## Customizing the Repo for the New Project
+
+(this information is based on the the tuturial: [Setting up Mark Jaquith’s wp-stack and wp-skeleton for Capristrano deployment](http://design.zhiwan.is/setting-up-mark-jaquiths-wp-stacks-and-wp-skeleton-for-capristrano-deployment/) )
+
+1. Edit the `wp-config.php`. Replace the %%DB_NAME%%, %%DB_USER%%, %%DB_PASSWORD%%, %%DB_HOST%% placeholders with the appropriate values for your server.
+1. Generate new security salts at [https://api.wordpress.org/secret-key/1.1/salt/](https://api.wordpress.org/secret-key/1.1/salt/), and insert them into `wp-config.php` as well.
+1. If you will be running a dev environment on your local machine, rename `local-config-sample.php` to `local-config.php` and add the appropriate database credentials to that file. (Note that `local-config.php` is in `.gitignore`, and so will not be pushed up to any remote repo.) 
+1. Create the directory structure for uploads so that uploaded images live outside the repo.
+
+        mkdir shared
+        mkdir shared/content
+        mkdir shared/content/uploads
+
+1. Open the `Gruntfile.js` file, and replace the \<themename>, \<account>, and \<hostname> placeholders with the values for your theme and server.
+
+## Adding a Custom Theme
+
+The official WordPress repo that is pulled in by the Git submodule contains only the standard themes that come with the current WordPress stable version. You need to add your own theme.
+
+The Gruntfile is tuned to help with a theme with the following directory structure:
 
  
 
 
-## Original README.md
+## Origin
 
-from [https://github.com/markjaquith/WordPress-Skeleton](https://github.com/markjaquith/WordPress-Skeleton)
-
-This is simply a skeleton repo for a WordPress site. Use it to jump-start your WordPress site repos, or fork it and customize it to your own liking!
-
-## Assumptions
-
-* WordPress as a Git submodule in `/wp/`
-* Custom content directory in `/content/` (cleaner, and also because it can't be in `/wp/`)
-* `wp-config.php` in the root (because it can't be in `/wp/`)
-* All writable directories are symlinked to similarly named locations under `/shared/`.
-
-## Questions & Answers
-
-**Q:** Will you accept pull requests?  
-**A:** Maybe — if I think the change is useful. I primarily made this for my own use, and thought people might find it useful. If you want to take it in a different direction and make your own customized skeleton, then just maintain your own fork.
-
-**Q:** Why the `/shared/` symlink stuff for uploads?  
-**A:** For local development, create `/shared/` (it is ignored by Git), and have the files live there. For production, have your deploy script (Capistrano is my choice) look for symlinks pointing to `/shared/` and repoint them to some outside-the-repo location (like an NFS shared directory or something). This gives you separation between Git-managed code and uploaded files.
-
-**Q:** What version of WordPress does this track?  
-**A:** The latest stable release. Send a pull request if I fall behind.
-
-**Q:** What's the deal with `local-config.php`?  
-**A:** It is for local development, which might have different MySQL credentials or do things like enable query saving or debug mode. This file is ignored by Git, so it doesn't accidentally get checked in. If the file does not exist (which it shouldn't, in production), then WordPress will used the DB credentials defined in `wp-config.php`.
-
-**Q:** What is `memcached.php`?  
-**A:** This is for people using memcached as an object cache backend. It should be something like: `<?php return array( "server01:11211", "server02:11211" ); ?>`. Programattic generation of this file is recommended.
-
-**Q:** Does this support WordPress in multisite mode?  
-**A:** It will, starting with WordPress 3.5 (due out in December, 2012). Earlier versions of WordPress don't support Multisite when WordPress is in a subdirectory.
+The WordPress folder layout for this Skeleton is adapted from Mark Jaquith's WordPress-Skeleton  [https://github.com/markjaquith/WordPress-Skeleton](https://github.com/markjaquith/WordPress-Skeleton)
