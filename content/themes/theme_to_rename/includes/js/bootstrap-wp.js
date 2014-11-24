@@ -1,4 +1,4 @@
-// first set the body to hide and show everyhthing when fully loaded ;)
+// first set the body to hide and show everything when fully loaded ;)
 document.write("<style>body{display:none;}</style>");
 
 jQuery( document ).ready( function( $ ) {

@@ -38,17 +38,86 @@ A skeleton install of WordPress, with the WordPress core separated out as a Git 
 
         mkdir -p shared/content/uploads
 
+
+## Customizing the Theme for a Client
+
+The official WordPress repo that is pulled in by the Git submodule contains only the standard themes that come with the current WordPress stable version. You should customize the theme. Start by doing the following:
+
 1. Run the Bash script `rename_theme.sh` with what you want your theme's name to be as its only argument
 
         ./rename_theme.sh new_theme_name
     
+1. Update the stylesheet header in style.css with the new client's information.
 1. Open the `Gruntfile.js` file, and replace the \<account> and \<hostname> placeholders with the values for your server.
+1. In order to use the Grunt development helper tasks, you must install their node packages:
 
-## Adding a Custom Theme
+        npm install
+      
+1. In order to use the SASS preproccessor to generate the CSS, the only thing in the theme's `style.css` file is the Wordpress header info. The theme's `functions.php` will include a css file at `includes/css/main.min.css`. It also includes minified versions of the Javascript files. All these minified files are first created or updated by running this Grunt task.
 
-The official WordPress repo that is pulled in by the Git submodule contains only the standard themes that come with the current WordPress stable version. You need to add your own theme.
+        grunt build
+        
+1. Once the asset files (CSS / JS ) are build, you can keep them updated file you are working on the theme by running the default Grunt task, which watches all the asset folders for changes:
 
-The Gruntfile is tuned to help with a theme with the following directory structure:
+        grunt
+
+
+The Gruntfile is tuned to help with a theme with the directory structure listed below.
+
+Most editing should be done in the `includes/sass/_application.scss` file for CSS changes, the `includes/js/main.js` file for JS changes, and by adding theme-dependent images to the `includes/images/` directory.
+
+Make these changes while running the default `grunt` command to "watch" those directories, or re-build the site after changes by running `grunt build`.
+
+        ├── 404.php
+        ├── README.md
+        ├── archive.php
+        ├── comments.php
+        ├── content-page.php
+        ├── content-single.php
+        ├── content.php
+        ├── footer.php
+        ├── functions.php
+        ├── header.php
+        ├── image.php
+        ├── includes
+        │   ├── bootstrap-wp-navwalker.php
+        │   ├── css
+        │   │   ├── main.css
+        │   │   ├── main.css.map
+        │   │   └── main.min.css
+        │   ├── custom-header.php
+        │   ├── customizer.php
+        │   ├── extras.php
+        │   ├── images
+        │   ├── jetpack.php
+        │   ├── js
+        │   │   ├── bootstrap-wp.js
+        │   │   ├── customizer.js
+        │   │   ├── keyboard-image-navigation.js
+        │   │   ├── main.js
+        │   │   ├── main.min.js
+        │   │   ├── main.min.map
+        │   │   ├── plugins.min.js
+        │   │   ├── plugins.min.map
+        │   │   └── skip-link-focus-fix.js
+        │   ├── resources
+        │   │   └── bootstrap
+        │   ├── sass
+        │   │   ├── _application.scss
+        │   │   ├── _bootstrap-wp.scss
+        │   │   ├── _fonts.scss
+        │   │   └── main.scss
+        │   └── template-tags.php
+        ├── index.php
+        ├── no-results.php
+        ├── page.php
+        ├── rtl.css
+        ├── screenshot.png
+        ├── search.php
+        ├── searchform.php
+        ├── sidebar.php
+        ├── single.php
+        └── style.css
 
  
 

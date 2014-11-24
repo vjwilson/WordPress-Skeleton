@@ -32,7 +32,6 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    sourcemap: true,
                     style: 'expanded',
                 },
                 files: {
@@ -44,7 +43,7 @@ module.exports = function(grunt) {
         // autoprefixer
         autoprefixer: {
             options: {
-                browsers: ['last 2 versions', 'ie 9', 'ios 6', 'android 4'],
+                browsers: ['last 3 versions', 'ie 9', 'ios 6', 'android 4'],
                 map: true
             },
             files: {
@@ -58,13 +57,15 @@ module.exports = function(grunt) {
         // css minify
         cssmin: {
             options: {
+                banner: '/* Minified CSS for <themename> */',
                 keepSpecialComments: 1
             },
             minify: {
                 expand: true,
-                cwd: 'content/themes/<themename>/includes/css',
+                cwd: 'content/themes/testwp/includes/css',
                 src: ['*.css', '!*.min.css'],
-                ext: '.css'
+                dest: 'content/themes/testwp/includes/css',
+                ext: '.min.css'
             }
         },
 
@@ -72,11 +73,12 @@ module.exports = function(grunt) {
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
-                "force": true
+                "force": true,
             },
             all: [
                 'Gruntfile.js',
-                'content/themes/<themename>/includes/js/**/*.js'
+                'content/themes/testwp/includes/js/**/*.js',
+                '!content/themes/testwp/includes/js/**/*.min.js'
             ]
         },
 
@@ -84,28 +86,27 @@ module.exports = function(grunt) {
         uglify: {
             plugins: {
                 options: {
-                    sourceMap: 'assets/js/plugins.js.map',
+                    sourceMap: 'content/themes/<themename>/includes/js/plugins.js.map',
                     sourceMappingURL: 'plugins.js.map',
                     sourceMapPrefix: 2
                 },
                 files: {
-                    'assets/js/plugins.min.js': [
-                        'assets/js/source/plugins.js',
-                        'assets/js/vendor/navigation.js',
-                        'assets/js/vendor/skip-link-focus-fix.js',
-                        // 'assets/js/vendor/yourplugin/yourplugin.js',
+                    'content/themes/<themename>/includes/js/plugins.min.js': [
+                        'content/themes/<themename>/includes/js/bootstrap-wp.js',
+                        'content/themes/<themename>/includes/js/customizer.js',
+                        'content/themes/<themename>/includes/js/skip-link-focus-fix.js'
                     ]
                 }
             },
             main: {
                 options: {
-                    sourceMap: 'assets/js/main.js.map',
+                    sourceMap: 'content/themes/<themename>/includes/js/main.js.map',
                     sourceMappingURL: 'main.js.map',
                     sourceMapPrefix: 2
                 },
                 files: {
-                    'assets/js/main.min.js': [
-                        'assets/js/source/main.js'
+                    'content/themes/<themename>/includes/js/main.min.js': [
+                        'content/themes/<themename>/includes/js/main.js'
                     ]
                 }
             }
@@ -151,6 +152,13 @@ module.exports = function(grunt) {
                     host: "<account>@<hostname>"
                 }
              },
+            staging: {
+                options: {
+                    src: "./",
+                    dest: "~/subdomains/staging",
+                    host: "<account>@<hostname>"
+                }
+             },
             production: {
                 options: {
                     src: "./",
@@ -184,12 +192,20 @@ module.exports = function(grunt) {
     // register task
     grunt.registerTask('default', ['watch']);
 
+    grunt.registerTask('build', [
+        'sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin'
+    ]);
+
     grunt.registerTask('deployPrototype', [
         'deploy:prototype'
     ]);
     grunt.registerTask('deployDev', [
         'checkbranch:dev',
         'deploy:dev'
+    ]);
+    grunt.registerTask('deployStaging', [
+        'checkbranch:staging',
+        'deploy:staging'
     ]);
      grunt.registerTask('deployProduction', [
         'checkbranch:master',
