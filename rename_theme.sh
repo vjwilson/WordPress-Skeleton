@@ -32,6 +32,10 @@ find . -type f \( -iname "*.php" -o -iname "*.css" -o -iname "*.md" -o -iname "*
 echo "$prefix is the new handle prefix."
 find . -type f \( -iname "*.php" -o -iname "*.css" -o -iname "*.md" -o -iname "*.js" \) -exec sed -i.bak "s/_tk-/${prefix}/g"  {} \;
 
+# third, change the theme name in the build script
+echo "Renaming theme in Gruntfile.js to $1 ..."
+sed -i.bak "s/<themename>/$1/g" Gruntfile.js;
+
 # get rid of any backup files created by sed
 find . -type f \( -iname "*.bak" \) -exec rm -rf  {} \;
 

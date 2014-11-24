@@ -36,11 +36,13 @@ A skeleton install of WordPress, with the WordPress core separated out as a Git 
 1. If you will be running a dev environment on your local machine, rename `local-config-sample.php` to `local-config.php` and add the appropriate database credentials to that file. (Note that `local-config.php` is in `.gitignore`, and so will not be pushed up to any remote repo.) 
 1. Create the directory structure for uploads so that uploaded images live outside the repo.
 
-        mkdir shared
-        mkdir shared/content
-        mkdir shared/content/uploads
+        mkdir -p shared/content/uploads
 
-1. Open the `Gruntfile.js` file, and replace the \<themename>, \<account>, and \<hostname> placeholders with the values for your theme and server.
+1. Run the Bash script `rename_theme.sh` with what you want your theme's name to be as its only argument
+
+        ./rename_theme.sh new_theme_name
+    
+1. Open the `Gruntfile.js` file, and replace the \<account> and \<hostname> placeholders with the values for your server.
 
 ## Adding a Custom Theme
 
