@@ -4,9 +4,9 @@ A skeleton install of WordPress, with the WordPress core separated out as a Git 
 
 ## Getting Started
 
-### In Bitbucket...
-1. Create a new repository in the **teamknowmad** account in Bitbucket. Give it a name so that it is clear who the client is and what type of project it is. (For instance, if this is a prototype site for Acme Inc., you could use `prototype.acme.com` )
-1. At the ***Repository setup*** screen in Bitbucket, click the *I have an existing project* turndown arrow. You will need the instructions there in a later step.
+### In your remote Git service ...
+1. Create a new repository in your account on the service where you will keep your canonical copy of the new repo (GitHub, Bitbucket, etc.). Give it a name so that it is clear who the client is and what type of project it is. (For instance, if this is a prototype site for Acme Inc., you could use `prototype.acme.com` )
+1. At the ***Quick Setup*** or ***Repository setup*** screen in your remote service, make note of the *I have an existing project* instructions. You will need the instructions there in a later step.
 ### Now, on your local machine...
 1. Decide where you want your new code repo to live. For instance, I keep a `~/Projects/` folder on my local machine, and I also create individual customer folders in that folder, so that if a customer has more than one site/app/project, each one would have its own repo.
 1. In the customer's directory, clone both this WordPress-Skeleton repo, and the included WordPress submodule all at once. Replace `<projectname>` with the name of this project.
