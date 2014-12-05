@@ -4,14 +4,14 @@ A skeleton install of WordPress, with the WordPress core separated out as a Git 
 
 ## Getting Started
 
-### In your remote Git service git@github.com:vjwilson/WordPress-Skeleton.git...
-1. Create a new repository in your account on the service where you will keep your canonical copy of the new repo (GitHub, Bitbucket, etc.). Give it a name so that it is clear who the client is and what type of project it is. (For instance, if this is a prototype site for Acme Inc., you could use `prototype.acme.com` )
-1. At the ***Quick Setup*** or ***Repository setup*** screen in your remote service, make note of the *I have an existing project* instructions. You will need the instructions there in a later step.
+### In Bitbucket...
+1. Create a new repository in the **teamknowmad** account in Bitbucket. Give it a name so that it is clear who the client is and what type of project it is. (For instance, if this is a prototype site for Acme Inc., you could use `prototype.acme.com` )
+1. At the ***Repository setup*** screen in Bitbucket, click the *I have an existing project* turndown arrow. You will need the instructions there in a later step.
 ### Now, on your local machine...
 1. Decide where you want your new code repo to live. For instance, I keep a `~/Projects/` folder on my local machine, and I also create individual customer folders in that folder, so that if a customer has more than one site/app/project, each one would have its own repo.
 1. In the customer's directory, clone both this WordPress-Skeleton repo, and the included WordPress submodule all at once. Replace `<projectname>` with the name of this project.
 
-        git clone --recursive git@github.com:vjwilson/WordPress-Skeleton.git <projectname>
+        git clone --recursive git@bitbucket.org:teamknowmad/wordpress-skeleton.git <projectname>
         
 1. Switch into the new repo directory
 
@@ -21,9 +21,9 @@ A skeleton install of WordPress, with the WordPress core separated out as a Git 
 
         git remote rename origin upstream
 
-1. Now, use the remote service instructions from Step 2 above to link your new cloned skeleton to your new remote repo.
+1. Now, use the Bitbucket instructions from Step 2 above to link your new cloned skeleton to your new Bitbucket repo.
 
-        git remote add origin <user>@<service>/<account>/<projectname>.git
+        git remote add origin git@bitbucket.org:teamknowmad/<projectname>.git
         git push -u origin --all   # pushes up the repo and its refs for the first time
         git push -u origin --tags  # pushes up any tags 
 
